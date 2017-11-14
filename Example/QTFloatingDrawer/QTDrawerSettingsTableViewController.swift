@@ -1,0 +1,118 @@
+//
+//  QTDrawerSettingsTableViewController.swift
+//  QTFloatingDrawer_Example
+//
+//  Created by Quixom Technology on 13/11/17.
+//  Copyright © 2017 CocoaPods. All rights reserved.
+//
+
+import UIKit
+import QTFloatingDrawer
+
+class QTDrawerSettingsTableViewController: UITableViewController {
+
+    let resetRowIndex:Int = 4
+    
+    @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var delayLabel: UILabel!
+    @IBOutlet weak var springVelocityLabel: UILabel!
+    @IBOutlet weak var springDampingLabel: UILabel!
+    
+    var animator: QTDrawerSpringAnimator?
+    
+    var defaultDuration: TimeInterval?
+    var defaultDelay: TimeInterval?
+    var defaultSpringVelocity: CGFloat?
+    var defaultSpringDamping: CGFloat?
+    
+    @IBOutlet weak var durationSlider: UISlider!
+    @IBOutlet weak var delaySlider: UISlider!
+    @IBOutlet weak var springVelocitySlider: UISlider!
+    @IBOutlet weak var springDampingSlider: UISlider!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        if let appDelegate: AppDelegate = UIApplication.shared.delegate as? AppDelegate {
+            animator = appDelegate.drawerViewController.animator
+            captureDefaultValues(animator: animator!)
+            reset()
+        }
+    }
+
+    func captureDefaultValues(animator:QTDrawerSpringAnimator) {
+        defaultDuration = animator.animationDuration
+        defaultDelay = animator.animationDelay
+        defaultSpringVelocity = animator.initialSpringVelocity
+        defaultSpringDamping = animator.springDamping
+    }
+
+    func reset() {
+        updateAnimator()
+        updateSliders()
+        updateLabels()
+    }
+    
+    func updateAnimator() {
+        if let currentAnimator = animator {
+            currentAnimator.animationDuration = TimeInterval(defaultDuration!)
+            currentAnimator.animationDelay == TimeInterval(defaultDelay!)
+            currentAnimator.initialSpringVelocity = defaultSpringVelocity!
+            currentAnimator.springDamping = defaultSpringDamping!
+        }
+    }
+    
+    func updateSliders() {
+        durationSlider.value = Float(defaultDuration!)
+        delaySlider.value = Float(defaultDelay!)
+        springVelocitySlider.value = Float(defaultSpringVelocity!)
+        springDampingSlider.value = Float(defaultSpringDamping!)
+    }
+    
+    func updateLabels() {
+        durationLabel.text = String(format: "%.2f", durationSlider.value)
+        delayLabel.text = String(format: "%.2f", delaySlider.value)
+        springVelocityLabel.text = String(format: "%.2f", springVelocitySlider.value)
+        springDampingLabel.text = String(format: "%.2f", springDampingSlider.value)
+    }
+    
+    @IBAction func durationSliderChanged(_ sender: UISlider) {
+        durationLabel.text = String(format: "%.2f", sender.value)
+        animator?.animationDuration = TimeInterval(sender.value)
+    }
+    
+    @IBAction func delaySliderChanged(_ sender: UISlider) {
+        delayLabel.text = String(format: "%.2f", sender.value)
+        animator?.animationDelay = TimeInterval(sender.value)
+    }
+    
+    @IBAction func springVelocitySliderChanged(_ sender: UISlider) {
+        springVelocityLabel.text = String(format: "%.2f", sender.value)
+        animator?.initialSpringVelocity = CGFloat(sender.value)
+    }
+    
+    @IBAction func springDampingSliderChanged(_ sender: UISlider) {
+        springDampingLabel.text = String(format: "%.2f", sender.value)
+        animator?.springDamping = CGFloat(sender.value)
+    }
+    
+    @IBAction func toggleLeftDrawer(_ sender: AnyObject) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.toggleLeftDrawer(sender: sender, animated: false)
+    }
+    
+    @IBAction func toggleRightDrawer(_ sender: AnyObject) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.toggleRightDrawer(sender: sender, animated: true)
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedRowIndex:Int = indexPath.section
+        if selectedRowIndex == resetRowIndex {
+            reset()
+        }
+    }
+
+
+}

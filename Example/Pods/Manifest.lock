@@ -1,0 +1,16 @@
+PODS:
+  - QTFloatingDrawer (0.1.0)
+
+DEPENDENCIES:
+  - QTFloatingDrawer (from `../`)
+
+EXTERNAL SOURCES:
+  QTFloatingDrawer:
+    :path: ../
+
+SPEC CHECKSUMS:
+  QTFloatingDrawer: 564d5c1c521e0e2b64258fdc022f722df481917a
+
+PODFILE CHECKSUM: 0b40a5beaf04440a910811666763bad72eae4051
+
+COCOAPODS: 1.2.1

@@ -1,0 +1,6 @@
+framework module Pods_QTFloatingDrawer_Tests {
+  umbrella header "Pods-QTFloatingDrawer_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

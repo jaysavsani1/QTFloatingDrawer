@@ -1,0 +1,6 @@
+framework module QTFloatingDrawer {
+  umbrella header "QTFloatingDrawer-umbrella.h"
+
+  export *
+  module * { export * }
+}
