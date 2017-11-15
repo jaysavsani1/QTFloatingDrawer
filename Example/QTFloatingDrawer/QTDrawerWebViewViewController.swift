@@ -16,7 +16,7 @@ class QTDrawerWebViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let url  = URL(string: "https://github.com/KyleGoddard/KGFloatingDrawer")
+        let url  = URL(string: "https://github.com/BhumaJ/QTFloatingDrawer")
             let request = URLRequest(url: url!)
             webView.loadRequest(request)
     }
