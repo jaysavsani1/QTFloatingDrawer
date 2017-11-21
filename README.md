@@ -21,6 +21,11 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 QTFloatingDrawer is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
+```
+pod 'QTFloatingDrawer', '~> 0.0.1'
+```
+
+
 ## How To Use
 ```
 func prepareDrawerViewController() -> QTDrawerViewController {
